@@ -30,7 +30,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -124,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "angularApp"
+  "defaultProject": "angularApp",
+  "cli": {
+    "analytics": false
+  }
 }

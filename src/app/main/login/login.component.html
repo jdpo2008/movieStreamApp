@@ -1,84 +1,150 @@
 <div class="page bg-primary">
-    <div class="page-single">
-        <div class="container">
-            <div class="row">
-                <div class="col mx-auto">
-                    <div class="row justify-content-center">
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div *ngIf="submitted" class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-indeterminate bg-info"></div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center title-style">
-                                        <h1 class="mb-2">Login</h1>
-                                        <hr>
-                                        <!-- <p class="text-muted">Ingresa a tu Cuenta</p> -->
-                                    </div>
-                                   
-                                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                                        <div class="form-group">
-                                            <label class="form-label">Correo<span class="text-red"> *</span></label>
-                                            <div class="input-group mb-4">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <i class="fe fe-mail"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="Correo" formControlName="email"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                                            </div>
-                                            <div *ngIf="(f.password.touched || f.email.dirty) && f.email.errors" class="bg-danger-transparent-2 text-danger px-4 py-2 br-3 mb-2" role="alert">
-                                                <div *ngIf="f.email.errors.required">El Correo es requerido</div>
-                                                <div *ngIf="f.email.errors.email">Ingrese un correo valido</div>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="form-group">
-                                            <label class="form-label">Contraseña<span class="text-red"> *</span></label>
-                                            <div class="input-group mb-4">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <i class="fe fe-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="password" class="form-control" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-                                            </div>
-                                            <div *ngIf="(f.password.touched || f.password.dirty) && f.password.errors" class="bg-danger-transparent-2 text-danger px-4 py-2 br-3 mb-2" role="alert">
-                                                <div *ngIf="f.password.errors.required">La contraseña es requerida</div>
-                                            </div>
-                                        </div>
-                                       
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" formControlName="remember" >
-                                            <span class="custom-control-label"> Recordarme</span>
-                                        </label>
-                                        <div class="row mt-4">
-                                            <div class="col-12">
-                                                <button type="submit" class="btn  btn-primary btn-block px-4" [disabled]="submitted || loginForm.invalid">Ingresar</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="row mt-4">
-                                        <div class="col-12 text-center">
-                                            <a href="forgot-password.html" class="btn btn-link box-shadow-0 px-4">Olvidaste la Contraseña?</a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center pt-4">
-                                        <div class="font-weight-normal fs-16">No posees una Cuenta? <a class="btn-link font-weight-normal" href="#"> <strong>Registrate Aquí</strong></a></div>
-                                    </div>
-                                    <hr class="divider my-6">
-                                    <div class="btn-list d-flex justify-content-md-center">
-                                        <a href="https://www.google.com/gmail/" class="btn btn-google"><i class="fa fa-google fa-1x mr-2"></i> Google</a>
-                                        <a href="https://twitter.com/" class="btn btn-twitter"><i class="fa fa-twitter fa-1x"></i> Twitter</a>
-                                        <a href="https://www.facebook.com/" class="btn btn-facebook"><i class="fa fa-facebook fa-1x"></i> Facebook</a>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="page-single">
+    <div class="container">
+      <div class="row">
+        <div class="col mx-auto">
+          <div class="row justify-content-center">
+            <div class="col-md-5">
+              <div class="card">
+                <div *ngIf="submitted" class="progress progress-xs">
+                  <div
+                    class="progress-bar progress-bar-indeterminate bg-info"
+                  ></div>
                 </div>
+                <div class="card-body">
+                  <div class="text-center title-style">
+                    <h1 class="mb-2">Login</h1>
+                    <hr />
+                    <!-- <p class="text-muted">Ingresa a tu Cuenta</p> -->
+                  </div>
+
+                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <label class="form-label"
+                        >Correo<span class="text-red"> *</span></label
+                      >
+                      <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fe fe-mail"></i>
+                          </div>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Correo"
+                          formControlName="email"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.email.errors
+                          }"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          (f.password.touched || f.email.dirty) &&
+                          f.email.errors
+                        "
+                        class="bg-danger-transparent-2 text-danger px-4 py-2 br-3 mb-2"
+                        role="alert"
+                      >
+                        <div *ngIf="f.email.errors.required">
+                          El Correo es requerido
+                        </div>
+                        <div *ngIf="f.email.errors.email">
+                          Ingrese un correo valido
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label"
+                        >Contraseña<span class="text-red"> *</span></label
+                      >
+                      <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fe fe-lock"></i>
+                          </div>
+                        </div>
+                        <input
+                          type="password"
+                          class="form-control"
+                          placeholder="Password"
+                          formControlName="password"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.password.errors
+                          }"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          (f.password.touched || f.password.dirty) &&
+                          f.password.errors
+                        "
+                        class="bg-danger-transparent-2 text-danger px-4 py-2 br-3 mb-2"
+                        role="alert"
+                      >
+                        <div *ngIf="f.password.errors.required">
+                          La contraseña es requerida
+                        </div>
+                      </div>
+                    </div>
+
+                    <label class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        formControlName="remember"
+                      />
+                      <span class="custom-control-label"> Recordarme</span>
+                    </label>
+                    <div class="row mt-4">
+                      <div class="col-12">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-block px-4"
+                          [disabled]="submitted || loginForm.invalid"
+                        >
+                          Ingresar
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="row mt-4">
+                    <div class="col-12 text-center">
+                      <a
+                        href="forgot-password.html"
+                        class="btn btn-link box-shadow-0 px-4"
+                        >Olvidaste la Contraseña?</a
+                      >
+                    </div>
+                  </div>
+                  <div class="text-center pt-4">
+                    <div class="font-weight-normal fs-16">
+                      No posees una Cuenta?
+                      <a class="btn-link font-weight-normal" href="#">
+                        <strong>Registrate Aquí</strong></a
+                      >
+                    </div>
+                  </div>
+                  <hr class="divider my-6" />
+                  <div class="btn-list d-flex justify-content-md-center">
+                    <button (click)="socialLogin()" class="btn btn-google">
+                      <i class="fa fa-google fa-1x mr-2"></i> Google
+                    </button>
+                    <button class="btn btn-twitter">
+                      <i class="fa fa-twitter fa-1x"></i> Twitter
+                    </button>
+                    <button class="btn btn-facebook">
+                      <i class="fa fa-facebook fa-1x"></i> Facebook
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

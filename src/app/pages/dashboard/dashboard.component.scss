@@ -1,0 +1,9 @@
+ngx-paginate ::ng-deep .page-entry {
+  background-color: #272d47;
+  color: #868e96;
+  border: 1px solid #868e96;
+}
+ngx-paginate ::ng-deep .page-entry.active {
+  background-color: #191919;
+  color: #fff;
+}

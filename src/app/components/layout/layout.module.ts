@@ -5,15 +5,9 @@ import { FullContentComponent } from './full-content/full-content.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
-
-
 @NgModule({
   declarations: [PagesContentComponent, FullContentComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    SharedModule
-  ],
-  exports: [SharedModule]
+  imports: [CommonModule, RouterModule, SharedModule],
+  exports: [],
 })
-export class LayoutModule { }
+export class LayoutModule {}

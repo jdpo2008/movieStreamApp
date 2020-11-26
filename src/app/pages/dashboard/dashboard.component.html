@@ -1,51 +1,26 @@
-<!-- <p>dashboard works!</p>
-<h2>{{ "HOME.TITLE" | translate }}</h2>
-<label>
-  {{ "HOME.SELECT" | translate }} <i [ngClass]="'flag flag-es'"></i>
-  <select #langSelect (change)="translate.use(langSelect.value)">
-    <option
-      *ngFor="let lang of translate.getLangs()"
-      [value]="lang"
-      [selected]="lang === translate.currentLang"
-    >
-      {{ lang }}
-    </option>
-  </select>
-</label> -->
+<perfect-scrollbar class="container-fluid">
+  <h3></h3>
+  <h2>{{ "DASHBOARD.TITLE" | translate }}</h2>
+  <div class="row justify-content-center">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let movie of movies">
+        <img
+          class="img-fluid"
+          [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+          [alt]="movie.title"
+        />
+        <h6 class="text-white mt-1">{{ movie.title }}</h6>
+      </div>
+    </div>
 
-<h3>Peliculas más Populares - Veronica</h3>
-<div class="row">
-  <div class="col-3" *ngFor="let movie of Movies">
-    <img
-      class="img-fluid"
-      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-      [alt]="movie.title"
-    />
-    <h6 class="text-white mt-1">{{ movie.title }}</h6>
+    <div class="row" style="margin-top: 2rem">
+      <ngx-paginate
+        [page]="page"
+        [options]="options"
+        (pageChange)="setPage($event)"
+        (pageSizeChange)="setPage($event)"
+      >
+      </ngx-paginate>
+    </div>
   </div>
-</div>
-
-<nav aria-label="Page navigation">
-	<ul class="pagination pagination-success mb-0">
-		<li class="page-item page-0">
-			<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-		</li>
-		<li class="page-item">
-			<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-		</li>
-		<li class="page-item active">
-			<a class="page-link" href="#">4</a>
-		</li>
-		<li class="page-item disabled"><span class="page-link">...</span></li>
-		<li class="page-item">
-			<a class="page-link" href="#">10</a>
-		</li>
-		<li class="page-item page-0">
-			<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-		</li>
-		<li class="page-item">
-			<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-		</li>
-	</ul>
-</nav>
-
+</perfect-scrollbar>

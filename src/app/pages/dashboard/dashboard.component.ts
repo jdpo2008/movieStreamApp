@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Movie } from 'src/app/models/MovieResponse.models';
+import { PageState, PaginateOptions } from 'ngx-paginate';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Movie, MoviesResponse } from 'src/app/models/MovieResponse.models';
 import { MovieService } from '../../services/movie.service';
+import { TranslationService } from '../../services/traslation.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,23 +12,75 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  Movies: Movie[];
+  movies: Movie[];
+  data: MoviesResponse;
+
+  options: PaginateOptions;
+  page = new PageState();
+
   constructor(
     public translate: TranslateService,
-    public _movieService: MovieService
+    public _movieService: MovieService,
+    private spinner: NgxSpinnerService,
+    private translationService: TranslationService
   ) {
-    this.translate.addLangs(['es', 'en', 'fr']);
-    this.translate.setDefaultLang('es');
+    this.page.currentPage = 1;
+    this.page.totalItems = 0;
+    this.page.numberOfPages = 0;
+    this.page.pageSize = 20;
 
-    const browserLang = translate.getBrowserLang();
-    this.translate.use(browserLang.match(/es|en|fr/) ? browserLang : 'es');
+    this.options = {
+      spanPages: 2,
+      previousPage: true,
+      nextPage: true,
+      firstPage: true,
+      lastPage: true,
+      titles: {
+        firstPage: 'First',
+        previousPage: 'Previous',
+        lastPage: 'Last',
+        nextPage: 'Next',
+        pageSize: 'Items per page',
+      },
+      pageSizes: [
+        {
+          value: 5,
+          display: '5',
+        },
+        {
+          value: 10,
+          display: '10',
+        },
+        {
+          value: 15,
+          display: '15',
+        },
+      ],
+    };
   }
 
   ngOnInit(): void {
-    //https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>
+    this.setPage(this.page);
+    this.translate
+      .use(this.translationService.getSelectedLanguage())
+      .subscribe();
+  }
 
-    this._movieService
-      .getAllPopular('1')
-      .subscribe((resp) => (this.Movies = resp));
+  setPage(event: PageState) {
+    this.spinner.show();
+    this._movieService.getAllPopular(String(event.currentPage)).subscribe(
+      (resp) => {
+        this.spinner.hide();
+        this.movies = resp.results;
+        this.page.currentPage = resp.page;
+        this.page.pageSize = resp.results.length;
+        this.page.totalItems = resp.total_results;
+        this.page.numberOfPages = resp.total_pages;
+      },
+      (error) => {
+        this.spinner.hide();
+        console.log(error);
+      }
+    );
   }
 }

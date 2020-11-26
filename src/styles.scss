@@ -3,3 +3,49 @@
 // @import "./assets/css/dark.css";
 // @import "./assets/css/skin-modes.css";
 // @import "./assets/css/sidemenu.css";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+.page-size-selection {
+  display: none !important;
+}
+
+.ps > .ps__rail-x,
+.ps > .ps__rail-y {
+  opacity: 0.6;
+  background: blue;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.symbol {
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 0.42rem;
+}
+.symbol.symbol-20 > img {
+  width: 100%;
+  max-width: 20px;
+  height: 20px;
+}
+.symbol.symbol-20 .symbol-label {
+  width: 20px;
+  height: 20px;
+}
+.symbol.symbol-20 .symbol-badge {
+  width: 12px;
+  height: 12px;
+  top: -6px;
+  left: -6px;
+}
+
+.topbar-item {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  display: flex;
+  align-items: stretch;
+}

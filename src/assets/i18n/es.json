@@ -1,6 +1,11 @@
 {
-    "HOME": {
-      "TITLE": "Bienvenido Angular con ngx-translate !",
-      "SELECT": "Cambiar el idoma"
-    }
+  "SIDEBAR": {
+    "DASHBOARD": "PRINCIPAL"
+  },
+  "HEADER": {},
+  "APP_HEADER": {},
+  "DASHBOARD": {
+    "TITLE": "Peliculas más Populares",
+    "SELECT": "Cambiar el idoma"
+  }
 }

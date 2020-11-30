@@ -19,16 +19,14 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPopular(page?: string): Observable<Movie[]> {
+  getAllPopular(page?: string): Observable<MoviesResponse> {
     const params = {
       ...this.params,
       page,
     };
-    return this.http
-      .get<MoviesResponse>(`${this.BaseURL}movie/popular?`, {
-        params,
-      })
-      .pipe(map((data) => data.results));
+    return this.http.get<MoviesResponse>(`${this.BaseURL}movie/popular?`, {
+      params,
+    });
   }
 
   findMovie(search: string): Observable<Movie[]> {

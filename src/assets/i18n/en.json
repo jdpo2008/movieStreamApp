@@ -1,6 +1,11 @@
 {
-    "HOME": {
-        "TITLE": "Hello Angular with ngx-translate!",
-        "SELECT": "Change language"
-      }
+  "SIDEBAR": {
+    "DASHBOARD": "DASHBOARD"
+  },
+  "HEADER": {},
+  "APP_HEADER": {},
+  "DASHBOARD": {
+    "TITLE": "Most Popular Movies",
+    "SELECT": "Change language"
+  }
 }

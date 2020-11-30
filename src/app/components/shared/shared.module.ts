@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
@@ -9,15 +10,21 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarHeaderComponent } from './sidebar-header/sidebar-header.component';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
-  declarations: [SidebarComponent, HeaderComponent, PagesHeaderComponent, FooterComponent, SidebarHeaderComponent],
-  imports: [
-    RouterModule,
-    CommonModule,
-    NgbModule
+  declarations: [
+    SidebarComponent,
+    HeaderComponent,
+    PagesHeaderComponent,
+    FooterComponent,
+    SidebarHeaderComponent,
   ],
-  exports: [NgbModule, SidebarComponent, HeaderComponent, PagesHeaderComponent, FooterComponent],
+  imports: [RouterModule, CommonModule, NgbModule, TranslateModule.forChild()],
+  exports: [
+    NgbModule,
+    SidebarComponent,
+    HeaderComponent,
+    PagesHeaderComponent,
+    FooterComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

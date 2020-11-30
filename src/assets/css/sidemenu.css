@@ -402,13 +402,14 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-flow: column;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   color: #1a1630;
   width: 100%;
   padding: 20px;
-  display: inline-block;
+  /* display: inline-block; */
   border-bottom: 1px solid #ebecf1;
 }
 .app-sidebar__user .dropdown-menu {
@@ -1453,6 +1454,12 @@
   height: 40px;
   box-shadow: 0px 2px 3px rgba(4, 4, 7, 0.1);
   border: 2px solid #ebeef1;
+}
+
+.user-pro-body {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 
 .user-pro-body .dot-label {

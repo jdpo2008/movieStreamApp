@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register.component';
+
+
 
 const route: Routes = [
   {
     path: "",
-    component: LoginComponent,
+    component: RegisterComponent,
     data: {
-      title: "Login Pages"
+      title: "Register Pages"
     }
   }
 ]
 
+
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(route)
   ]
 })
-export class LoginModule { }
+export class RegisterModule { }

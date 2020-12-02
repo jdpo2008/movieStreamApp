@@ -16,6 +16,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authProcessService.listenToUserEvents();
-    this.router.navigate['pages/dashboard'];
+    this.router.navigate([`pages/dashboard`]);
   }
 }

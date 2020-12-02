@@ -1,7 +1,7 @@
-<perfect-scrollbar class="container-fluid">
+<perfect-scrollbar>
   <h3></h3>
   <h2>{{ "DASHBOARD.TITLE" | translate }}</h2>
-  <div class="row justify-content-center">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-3" *ngFor="let movie of movies">
         <img
@@ -13,14 +13,18 @@
       </div>
     </div>
 
-    <div class="row" style="margin-top: 2rem">
-      <ngx-paginate
-        [page]="page"
-        [options]="options"
-        (pageChange)="setPage($event)"
-        (pageSizeChange)="setPage($event)"
-      >
-      </ngx-paginate>
+    <div class="row justify-content-center" style="margin-top: 2rem">
+      <div class="col-md-4"></div>
+      <div class="col-md-6">
+        <ngx-paginate
+          [page]="page"
+          [options]="options"
+          (pageChange)="setPage($event)"
+          (pageSizeChange)="setPage($event)"
+        >
+        </ngx-paginate>
+      </div>
+      <div class="col-md-2"></div>
     </div>
   </div>
 </perfect-scrollbar>

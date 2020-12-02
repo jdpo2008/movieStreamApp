@@ -1,43 +1,75 @@
 <div class="app-sidebar__logo">
-    <a class="header-brand brand-5" href="index.html">
-        <img src="./assets/images/brand/logo.png" class="header-brand-img desktop-lgo" alt="Admitro logo">
-        <img src="./assets/images/brand/logo1.png" class="header-brand-img dark-logo" alt="Admitro logo">
-        <img src="./assets/images/brand/favicon.png" class="header-brand-img mobile-logo" alt="Admitro logo">
-        <img src="./assets/images/brand/favicon1.png" class="header-brand-img darkmobile-logo" alt="Admitro logo">
-    </a>
+  <a class="header-brand brand-5" href="index.html">
+    <img
+      src="./assets/images/brand/logo.png"
+      class="header-brand-img desktop-lgo"
+      alt="Admitro logo"
+    />
+    <img
+      src="./assets/images/brand/logo1.png"
+      class="header-brand-img dark-logo"
+      alt="Admitro logo"
+    />
+    <img
+      src="./assets/images/brand/favicon.png"
+      class="header-brand-img mobile-logo"
+      alt="Admitro logo"
+    />
+    <img
+      src="./assets/images/brand/favicon1.png"
+      class="header-brand-img darkmobile-logo"
+      alt="Admitro logo"
+    />
+  </a>
 </div>
 <div class="app-sidebar__user">
-    <div class="dropdown user-pro-body text-center">
-        <div class="user-pic">
-            <img src="./assets/images/avatars/avatar-01.png" alt="user-img" class="avatar-xl rounded-circle mb-1">
-        </div>
-        <div class="user-info">
-            <h5 class=" mb-1">José Daniel</h5>
-            <span class="text-muted app-sidebar__user-name text-sm">Web Designer</span>
-        </div>
+  <div class="dropdown user-pro-body text-center">
+    <div class="user-pic">
+      <img
+        src="./assets/images/avatars/avatar-01.png"
+        alt="user-img"
+        class="avatar-xl rounded-circle mb-1"
+      />
     </div>
-    <div class="sidebar-navs">
-        <ul class="nav nav-pills-circle justify-content-md-center">
-            <li class="nav-item" placement="bottom" ngbTooltip="Perfil" title="Perfil">
-                <a class="icon" href="#" >
-                    <i class="las la-life-ring header-icons"></i>
-                </a>
-            </li>
-            <!-- <li class="nav-item" placement="top" ngbTooltip="Documentation" title="Documentation">
-                <a class="icon" href="#">
-                    <i class="las la-file-alt header-icons"></i>
-                </a>
-            </li> -->
-            <li class="nav-item" placement="bottom" ngbTooltip="Cerrar Sesion" title="Cerrar Sesion">
-                <a href="#" class="icon">
-                    <i class="las la-project-diagram header-icons"></i>
-                </a>
-            </li>
-            <li class="nav-item" placement="bottom" ngbTooltip="Settins" title="Settins">
-                <a class="icon" href="#">
-                    <i class="las la-cog header-icons"></i>
-                </a>
-            </li>
-        </ul>
+    <div class="user-info">
+      <h5 class="mb-1">José Daniel</h5>
+      <span class="text-muted app-sidebar__user-name text-sm"
+        >Web Designer</span
+      >
     </div>
+  </div>
+  <div class="sidebar-navs">
+    <ul class="nav nav-pills-circle justify-content-md-center">
+      <li
+        class="nav-item"
+        placement="bottom"
+        ngbTooltip="Perfil"
+        title="Perfil"
+      >
+        <button class="icon">
+          <i class="las la-user header-icons"></i>
+        </button>
+      </li>
+      <li
+        class="nav-item"
+        placement="bottom"
+        ngbTooltip="Settins"
+        title="Settins"
+      >
+        <button class="icon">
+          <i class="las la-cog header-icons"></i>
+        </button>
+      </li>
+      <li
+        class="nav-item"
+        placement="bottom"
+        ngbTooltip="Cerrar Sesion"
+        title="Cerrar Sesion"
+      >
+        <button class="icon" (click)="signOut()">
+          <i class="la la-sign-out header-icons"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>

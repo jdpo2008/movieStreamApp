@@ -2,27 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StrengthMeterModule } from 'ngx-strength-meter';
 import { RegisterComponent } from './register.component';
-
-
 
 const route: Routes = [
   {
-    path: "",
+    path: '',
     component: RegisterComponent,
     data: {
-      title: "Register Pages"
-    }
-  }
-]
-
+      title: 'Register Pages',
+    },
+  },
+];
 
 @NgModule({
   declarations: [RegisterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(route)
-  ]
+    StrengthMeterModule,
+    RouterModule.forChild(route),
+  ],
 })
-export class RegisterModule { }
+export class RegisterModule {}

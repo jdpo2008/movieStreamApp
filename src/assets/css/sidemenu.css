@@ -1469,13 +1469,32 @@
 
 .sidebar-navs a {
   background: #fff;
-  color: #68798b !important;
+  color: #576482 !important;
   border-radius: 50px;
   padding: 0.5rem !important;
   margin: 12px 8px 0 8px;
   border-radius: 50px;
   box-shadow: 0px 2px 3px rgba(4, 4, 7, 0.1);
   border: 1px solid #ebecf1;
+}
+
+.sidebar-navs button {
+  background: #2f3655;
+  color: #576482 !important;
+  border-radius: 50px;
+  padding: 0.5rem !important;
+  margin: 12px 8px 0 8px;
+  border-radius: 50px;
+  box-shadow: 0px 2px 3px rgba(4, 4, 7, 0.1);
+  border: 1px solid #ebecf1;
+}
+
+.sidebar-navs button:hover {
+  background: #576482;
+}
+
+.sidebar-navs button:hover > i {
+  color: #fff;
 }
 
 .app-sidebar .sidebar-navs {

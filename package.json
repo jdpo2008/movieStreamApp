@@ -37,6 +37,7 @@
     "ngx-paginate": "^2.0.1",
     "ngx-perfect-scrollbar": "^10.0.1",
     "ngx-spinner": "^10.0.1",
+    "ngx-strength-meter": "^9.0.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.10.3",

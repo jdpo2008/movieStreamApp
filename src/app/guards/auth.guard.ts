@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     return this._authService.afa.user.pipe(
       map((user) => {
+        debugger;
         if (user) {
           if (!user.emailVerified) {
             this.router.navigate([`main/auth/login`]);

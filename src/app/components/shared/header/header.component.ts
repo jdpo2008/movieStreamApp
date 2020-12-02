@@ -3,6 +3,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LanguageFlag } from '../../../interfaces/language.interface';
 import { TranslationService } from '../../../services/traslation.service';
+import { AuthProcessService } from '../../../services/auth-sync.service';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(
+    private _authService: AuthProcessService,
     private translationService: TranslationService,
     private router: Router
   ) {}
@@ -62,5 +64,9 @@ export class HeaderComponent implements OnInit {
 
   setSelectedLanguage(): any {
     this.setLanguage(this.translationService.getSelectedLanguage());
+  }
+
+  signOut() {
+    this._authService.signOut();
   }
 }

@@ -1,37 +1,36 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
   AngularFirestoreCollection,
-} from "@angular/fire/firestore";
-import { UserInfo } from "@firebase/auth-types";
-import * as firebase from "firebase";
+} from '@angular/fire/firestore';
+import { UserInfo } from '@firebase/auth-types';
+import * as firebase from 'firebase';
 //import { firebase } from "@firebase/app";
-import { Observable } from "rxjs/internal/observable";
-import { map } from "rxjs/operators";
+import { Observable } from 'rxjs/internal/observable';
+import { map } from 'rxjs/operators';
 
 export const collections = {
-  users: "users"
+  users: 'users',
 };
 
 export type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 export type DocumentPredicate<T> = string | AngularFirestoreDocument<T>;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class FirestoreSyncService {
-  
   constructor(public afs: AngularFirestore) {
     //this.afs.firestore.settings({ timestampsInSnapshots: true });
   }
 
   col<T>(ref: CollectionPredicate<T>, queryFn?): AngularFirestoreCollection<T> {
-    return typeof ref === "string" ? this.afs.collection<T>(ref, queryFn) : ref;
+    return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref;
   }
 
   doc<T>(ref: DocumentPredicate<T>): AngularFirestoreDocument<T> {
-    return typeof ref === "string" ? this.afs.doc<T>(ref) : ref;
+    return typeof ref === 'string' ? this.afs.doc<T>(ref) : ref;
   }
 
   doc$<T>(ref: DocumentPredicate<T>): Observable<T> {
@@ -69,7 +68,7 @@ export class FirestoreSyncService {
   }
 
   get timestamp() {
-    return firebase.default.firestore.FieldValue.serverTimestamp;
+    return firebase.default.firestore.FieldValue.serverTimestamp();
   }
 
   set<T>(ref: DocumentPredicate<T>, data: any) {
@@ -120,5 +119,4 @@ export class FirestoreSyncService {
     };
     return userRef.set(data, { merge: true });
   }
-
 }

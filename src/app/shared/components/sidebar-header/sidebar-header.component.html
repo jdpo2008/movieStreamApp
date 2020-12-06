@@ -26,13 +26,13 @@
   <div class="dropdown user-pro-body text-center">
     <div class="user-pic">
       <img
-        src="./assets/images/avatars/avatar-01.png"
+        [src]="photoURL | userImage"
         alt="user-img"
         class="avatar-xl rounded-circle mb-1"
       />
     </div>
     <div class="user-info">
-      <h5 class="mb-1">José Daniel</h5>
+      <h5 class="mb-1">{{ displayName }}</h5>
       <span class="text-muted app-sidebar__user-name text-sm"
         >Web Designer</span
       >

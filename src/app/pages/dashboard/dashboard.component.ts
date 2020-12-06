@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PageState, PaginateOptions } from 'ngx-paginate';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,13 +8,13 @@ import {
 } from '../../shared/models/MovieResponse.models';
 import { MovieService } from '../../services/movie.service';
 import { TranslationService } from '../../services/traslation.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   movies: Movie[];

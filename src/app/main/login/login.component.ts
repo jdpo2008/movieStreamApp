@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -12,12 +12,14 @@ import { AuthProcessService } from '../../services/auth-sync.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean;
   authProvider: AuthProvider;
   constructor(
+    private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     public _authService: AuthProcessService
   ) {}
@@ -41,24 +43,31 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.cd.markForCheck();
     this._authService
       .signInWith(AuthProvider.EmailAndPassword, {
         email: this.f.email.value,
         password: this.f.password.value,
       })
-      .finally(() => (this.submitted = false));
+      .finally(() => {
+        this.submitted = false; 
+        this.cd.markForCheck();
+      });
   }
 
   googleLogin() {
-    this._authService.signInWith(AuthProvider.Google);
+    this.cd.markForCheck();
+    this._authService.signInWith(AuthProvider.Google).finally(() => this.cd.markForCheck());
   }
 
   facebookLogin() {
-    this._authService.signInWith(AuthProvider.Facebook);
+    this.cd.markForCheck();
+    this._authService.signInWith(AuthProvider.Facebook).finally(() => this.cd.markForCheck());
   }
 
   twitterLogin() {
-    this._authService.signInWith(AuthProvider.Twitter);
+    this.cd.markForCheck();
+    this._authService.signInWith(AuthProvider.Twitter).finally(() => this.cd.markForCheck());
   }
 
   getMessageError(control: FormControl) {}

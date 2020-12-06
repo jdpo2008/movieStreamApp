@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { LanguageFlag } from '../../../shared/interfaces/language.interface';
 import { TranslationService } from '../../../services/traslation.service';
 import { AuthProcessService } from '../../../services/auth-sync.service';
+import { Subscription } from 'rxjs';
+import { User } from '@firebase/auth-types';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  photoURL: string;
+  userSuscription: Subscription;
   language: LanguageFlag;
   languages: LanguageFlag[] = [
     {
@@ -43,6 +47,14 @@ export class HeaderComponent implements OnInit {
       .subscribe((event) => {
         this.setSelectedLanguage();
       });
+
+    this.userSuscription = this._authService.user$
+                              .pipe(map((res: User) => { return res.photoURL }))
+                              .subscribe((data: any) => this.photoURL = data)
+  }
+
+  ngOnDestroy(): void {
+    this.userSuscription.unsubscribe();
   }
 
   setLanguageWithRefresh(lang) {

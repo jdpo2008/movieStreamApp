@@ -10,17 +10,6 @@ const routes: Routes = [
     component: PagesContentComponent,
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./pages/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule
-          ),
-        canActivate: [AuthGuard],
-        data: {
-          title: 'Dashboard',
-        },
-      },
-      {
         path: '',
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),

@@ -4,11 +4,13 @@
     *ngFor="let movie of movies"
   >
     <div class="card overflow-hidden">
-      <img
-        class="img-fluid"
-        [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-        alt="img of {{ movie.title }}"
-      />
+      <a href="#">
+        <img
+          class="img-fluid"
+          [src]="movie.poster_path | imageFill: '500'"
+          alt="img of {{ movie.title }}"
+        />
+      </a>
       <!-- [src]="movie.poster_path | imageFill: '500'" -->
       <div class="card-body">
         <h4 class="card-title text-center text-white">{{ movie.title }}</h4>

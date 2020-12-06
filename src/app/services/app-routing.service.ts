@@ -16,8 +16,7 @@ export class AppRoutingService {
   }
 
   private getRouteData(data: string): any {
-    const root = this.router.routerState.snapshot.root.children[0].routeConfig
-      .children[0].data[data];
+    const root = this.router.routerState.snapshot.root.children[0].children[0].children[0].data[data];
     return root;
   }
 

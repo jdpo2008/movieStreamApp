@@ -20,8 +20,6 @@ export class PagesHeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.title = this.appRoutingService.getRouteTitle();
 
-    console.log(this.title);
-
     this.routerEvents = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {

@@ -10,6 +10,7 @@ import { map, take } from 'rxjs/operators';
 import { Accounts } from './../enums/accounts.enum';
 import { AuthProvider } from '../enums';
 import { FirestoreSyncService } from './firestore-sync.service';
+import { ToastService } from './toast.service';
 
 export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
@@ -35,7 +36,8 @@ export class AuthProcessService {
   constructor(
     private router: Router,
     public afa: AngularFireAuth,
-    public fireStoreService: FirestoreSyncService
+    public fireStoreService: FirestoreSyncService,
+    public toastService: ToastService
   ) {}
 
   listenToUserEvents() {
@@ -97,7 +99,8 @@ export class AuthProcessService {
       }
       await this.handleSuccess(signInResult);
     } catch (err) {
-      //this.notifyError(err);
+      console.log(err);
+      this.notifyError(this.getErrorMessageAuth(err));
     }
   }
 
@@ -124,7 +127,7 @@ export class AuthProcessService {
 
       await this.handleSuccess(userCredential);
     } catch (err) {
-      //this.notifyError(err);
+      this.notifyError(this.getErrorMessageAuth(err));
     }
   }
 
@@ -141,13 +144,23 @@ export class AuthProcessService {
 
       this.router.navigate([`main/auth/login`]);
     } catch (error) {
-      //this.notifyError(error);
+      this.notifyError(error.message);
     }
   }
 
   async handleSuccess(userCredential: UserCredential) {
     this.onSuccessEmitter.next(userCredential.user);
-    debugger;
+
+    if (!userCredential.user.emailVerified) {
+      this.toastService.setMessage({
+        icon: 'warning',
+        title: 'Información',
+        text: 'Debes confirmar tu dirección de Correo electronico',
+        timer: 3000,
+      });
+      return;
+    }
+
     try {
       await this.fireStoreService.updateUserData(
         this.parseUserInfo(userCredential.user)
@@ -159,10 +172,16 @@ export class AuthProcessService {
     }
     this.router.navigate([`pages/dashboard`]);
 
-    const fallbackMessage = `Bienvenido ${
+    const fallbackMessage = `${
       userCredential.user.displayName ? userCredential.user.displayName : ''
     }`;
-    //this.showSuccesToast(fallbackMessage);
+
+    this.toastService.setMessage({
+      icon: 'success',
+      title: 'Bienvenido',
+      text: fallbackMessage,
+      timer: 3000,
+    });
   }
 
   public reloadUserInfo() {
@@ -214,5 +233,46 @@ export class AuthProcessService {
 
   public getPhotoPath(image: string): string {
     return `assets/images/user/${image}.svg`;
+  }
+
+  notifyError(message: string) {
+    this.toastService.setMessage({
+      icon: 'error',
+      title: 'Lo Siento!',
+      text: message,
+      timer: 3000,
+    });
+  }
+
+  getErrorMessageAuth(error: any): string {
+    let message = '';
+    switch (error.code) {
+      case 'auth/invalid-email':
+        message = 'Debe ingresar un correo valido';
+        break;
+      case 'auth/user-disabled':
+        message = 'El usuario se encuentra deshabilitado';
+        break;
+      case 'auth/user-not-found':
+        message = 'El Correo y/o la contraseña no son validos';
+        break;
+      case 'auth/wrong-password':
+        message = 'El Correo y/o la contraseña no son validos';
+        break;
+      //Errores en Registro
+      case 'auth/email-already-in-use':
+        message = 'El Correo ya se encuentra en uso';
+        break;
+      case 'auth/operation-not-allowed':
+        message = 'La cuenta no se encuentra habilitada en Firebase';
+        break;
+      case 'auth/weak-password':
+        message = 'La contraseña no es lo suficientemente segura';
+        break;
+      default:
+        message = 'Codigo de error no encontrado';
+    }
+
+    return message;
   }
 }

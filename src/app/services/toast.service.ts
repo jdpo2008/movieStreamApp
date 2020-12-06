@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { AlertContent } from '../interfaces/alert.interface';
+import { AlertContent } from '../shared/interfaces/alert.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,7 @@ export class ToastService {
         toast.addEventListener('mouseenter', Swal.stopTimer);
         toast.addEventListener('mouseleave', Swal.resumeTimer);
       },
+      background: '#20223c',
       customClass: {
         title: 'title-class',
         content: 'content-class',

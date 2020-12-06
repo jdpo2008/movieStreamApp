@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PageState, PaginateOptions } from 'ngx-paginate';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Movie, MoviesResponse } from 'src/app/models/MovieResponse.models';
+import {
+  Movie,
+  MoviesResponse,
+} from '../../shared/models/MovieResponse.models';
 import { MovieService } from '../../services/movie.service';
 import { TranslationService } from '../../services/traslation.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   movies: Movie[];
   data: MoviesResponse;
-
+  suscription: Subscription;
   options: PaginateOptions;
   page = new PageState();
 
@@ -66,21 +71,27 @@ export class DashboardComponent implements OnInit {
       .subscribe();
   }
 
+  ngOnDestroy() {
+    this.suscription.unsubscribe();
+  }
+
   setPage(event: PageState) {
     this.spinner.show();
-    this._movieService.getAllPopular(String(event.currentPage)).subscribe(
-      (resp) => {
-        this.spinner.hide();
-        this.movies = resp.results;
-        this.page.currentPage = resp.page;
-        this.page.pageSize = resp.results.length;
-        this.page.totalItems = resp.total_results;
-        this.page.numberOfPages = resp.total_pages;
-      },
-      (error) => {
-        this.spinner.hide();
-        console.log(error);
-      }
-    );
+    this.suscription = this._movieService
+      .getAllPopular(String(event.currentPage))
+      .subscribe(
+        (resp) => {
+          this.spinner.hide();
+          this.movies = resp.results;
+          this.page.currentPage = resp.page;
+          this.page.pageSize = resp.results.length;
+          this.page.totalItems = resp.total_results;
+          this.page.numberOfPages = resp.total_pages;
+        },
+        (error) => {
+          this.spinner.hide();
+          console.log(error);
+        }
+      );
   }
 }

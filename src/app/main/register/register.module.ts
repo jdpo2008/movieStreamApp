@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StrengthMeterModule } from 'ngx-strength-meter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './register.component';
 
 const route: Routes = [
@@ -18,6 +19,7 @@ const route: Routes = [
 @NgModule({
   declarations: [RegisterComponent],
   imports: [
+    NgbModule,
     CommonModule,
     ReactiveFormsModule,
     StrengthMeterModule,

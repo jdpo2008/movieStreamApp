@@ -6,10 +6,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthProvider } from '../../enums';
-import {
-  AuthProcessService,
-  googleAuthProvider,
-} from '../../services/auth-sync.service';
+import { AuthProcessService } from '../../services/auth-sync.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +19,7 @@ export class LoginComponent implements OnInit {
   authProvider: AuthProvider;
   constructor(
     private fb: FormBuilder,
-    private _authService: AuthProcessService
+    public _authService: AuthProcessService
   ) {}
 
   ngOnInit(): void {
@@ -36,19 +33,14 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       remember: [false],
     });
-    console.log(this.loginForm.controls.email);
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
-
-    console.log(this.loginForm.value);
-
     this._authService
       .signInWith(AuthProvider.EmailAndPassword, {
         email: this.f.email.value,
@@ -57,8 +49,16 @@ export class LoginComponent implements OnInit {
       .finally(() => (this.submitted = false));
   }
 
-  socialLogin(provider?: AuthProvider) {
+  googleLogin() {
     this._authService.signInWith(AuthProvider.Google);
+  }
+
+  facebookLogin() {
+    this._authService.signInWith(AuthProvider.Facebook);
+  }
+
+  twitterLogin() {
+    this._authService.signInWith(AuthProvider.Twitter);
   }
 
   getMessageError(control: FormControl) {}

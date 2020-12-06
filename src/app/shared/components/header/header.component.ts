@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { LanguageFlag } from '../../../interfaces/language.interface';
+import { LanguageFlag } from '../../../shared/interfaces/language.interface';
 import { TranslationService } from '../../../services/traslation.service';
 import { AuthProcessService } from '../../../services/auth-sync.service';
 

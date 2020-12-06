@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Genres, Movie, MoviesResponse } from '../models/MovieResponse.models';
+import {
+  Genres,
+  Movie,
+  MoviesResponse,
+} from '../shared/models/MovieResponse.models';
 
 @Injectable({
   providedIn: 'root',

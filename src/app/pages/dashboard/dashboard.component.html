@@ -1,19 +1,11 @@
 <perfect-scrollbar>
-  <h3></h3>
-  <h2>{{ "DASHBOARD.TITLE" | translate }}</h2>
+  <div class="px-4 mb-4">
+    <h3>{{ "DASHBOARD.TITLE" | translate }}</h3>
+  </div>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3" *ngFor="let movie of movies">
-        <img
-          class="img-fluid"
-          [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-          [alt]="movie.title"
-        />
-        <h6 class="text-white mt-1">{{ movie.title }}</h6>
-      </div>
-    </div>
+    <app-movie-card [movies]="movies"></app-movie-card>
 
-    <div class="row justify-content-center" style="margin-top: 2rem">
+    <div class="row justify-content-center mt-4" *ngIf="movies">
       <div class="col-md-4"></div>
       <div class="col-md-6">
         <ngx-paginate

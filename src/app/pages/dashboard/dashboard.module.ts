@@ -13,6 +13,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { DashboardComponent } from './dashboard.component';
+import { ComponentsModule } from '../../components/components.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -35,6 +36,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    ComponentsModule,
     HttpClientModule,
     NgxPaginateModule,
     RouterModule.forChild(routes),

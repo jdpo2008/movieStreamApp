@@ -1,0 +1,34 @@
+<div class="row" *ngIf="movies">
+  <div
+    class="col-lg-3 col-md-3 col-sm-6 col-12 mb-4"
+    *ngFor="let movie of movies"
+  >
+    <div class="card overflow-hidden">
+      <img
+        class="img-fluid"
+        [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        alt="img of {{ movie.title }}"
+      />
+      <!-- [src]="movie.poster_path | imageFill: '500'" -->
+      <div class="card-body">
+        <h4 class="card-title text-center text-white">{{ movie.title }}</h4>
+        <div class="row">
+          <div class="col p-0">
+            <div class="votos py-1">
+              {{ movie.vote_average | number: "1.1" }}
+            </div>
+          </div>
+          <div class="col-9 text-center p-0">
+            <star-rating
+              [value]="movie.vote_average"
+              totalstars="10"
+              checkedcolor="yellow"
+              uncheckedcolor="grey"
+              size="17px"
+            ></star-rating>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

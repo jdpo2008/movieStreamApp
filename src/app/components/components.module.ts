@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from './shared/shared.module';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
-  
+  declarations: [MovieCardComponent],
+  imports: [CommonModule, RatingModule],
+  exports: [MovieCardComponent],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

@@ -1,8 +1,31 @@
 <perfect-scrollbar>
-  <div class="px-4 mb-4">
-    <h3>{{ "DASHBOARD.TITLE" | translate }}</h3>
-  </div>
   <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 mb-2">
+        <h3>{{ "DASHBOARD.TITLE" | translate }}</h3>
+      </div>
+      <div class="col-md-4 mb-2"></div>
+      <div class="col-md-4 mb-2">
+        <div class="form-group d-flex">
+          <label class="form-label mr-2 mt-2" for="#genres"
+            >{{ "DASHBOARD.GENRES" | translate }}:</label
+          >
+          <select
+            class="form-control custom-select"
+            #genresSelect
+            id="genres"
+            (change)="genresChande($event)"
+          >
+            <option [value]="null">{{ "DASHBOARD.SELECT" | translate }}</option>
+            <ng-container *ngFor="let item of genres$ | async">
+              <option [value]="item.id">
+                {{ item.name }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
     <app-movie-card [movies]="movies"></app-movie-card>
 
     <div class="row justify-content-center mt-4" *ngIf="movies">

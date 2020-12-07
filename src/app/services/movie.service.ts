@@ -21,14 +21,30 @@ export class MovieService {
     language: 'es-ES',
   };
 
+  '&page=1&with_genres=28';
+
   constructor(private http: HttpClient) {}
 
-  getAllPopular(page?: string): Observable<MoviesResponse> {
-    const params = {
-      ...this.params,
-      page,
-    };
-    return this.http.get<MoviesResponse>(`${this.BaseURL}movie/popular?`, {
+  getAllPopular(
+    page?: string,
+    genre: string = 'null'
+  ): Observable<MoviesResponse> {
+    let params = {};
+    if (genre == 'null') {
+      params = {
+        ...this.params,
+        page,
+      };
+    } else {
+      params = {
+        ...this.params,
+        page,
+        with_genres: genre,
+      };
+    }
+
+    console.log(genre);
+    return this.http.get<MoviesResponse>(`${this.BaseURL}discover/movie?`, {
       params,
     });
   }
@@ -51,8 +67,10 @@ export class MovieService {
   }
 
   getGenres(): Observable<Genres[]> {
-    return this.http.get<Genres[]>(`${this.BaseURL}genre/movie/list?`, {
-      params: this.params,
-    });
+    return this.http
+      .get<any>(`${this.BaseURL}genre/movie/list?`, {
+        params: this.params,
+      })
+      .pipe(map((resp: any) => resp.genres));
   }
 }

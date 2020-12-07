@@ -6,6 +6,7 @@
   "APP_HEADER": {},
   "DASHBOARD": {
     "TITLE": "Films les plus populaires",
-    "SELECT": "Changer la langue"
+    "SELECT": "Changer la langue",
+    "GENRES": "Género"
   }
 }

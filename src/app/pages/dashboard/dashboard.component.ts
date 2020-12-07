@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PageState, PaginateOptions } from 'ngx-paginate';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,13 +14,14 @@ import {
 } from '../../shared/models/MovieResponse.models';
 import { MovieService } from '../../services/movie.service';
 import { TranslationService } from '../../services/traslation.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Genres } from '../../shared/models/MovieResponse.models';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   movies: Movie[];
@@ -22,6 +29,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   suscription: Subscription;
   options: PaginateOptions;
   page = new PageState();
+  genres$: Observable<Genres[]>;
+  genre: string | null;
+  @ViewChild('genresSelect') genresSelect;
 
   constructor(
     public translate: TranslateService,
@@ -69,16 +79,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.translate
       .use(this.translationService.getSelectedLanguage())
       .subscribe();
+    this.genres$ = this._movieService.getGenres();
   }
 
   ngOnDestroy() {
     this.suscription.unsubscribe();
   }
+  genresChande(event: any) {
+    console.log(event.target.value);
+    this.genre = event.target.value;
+    this.setPage(this.page);
+  }
 
   setPage(event: PageState) {
     this.spinner.show();
     this.suscription = this._movieService
-      .getAllPopular(String(event.currentPage))
+      .getAllPopular(String(event.currentPage), this.genre)
       .subscribe(
         (resp) => {
           this.spinner.hide();

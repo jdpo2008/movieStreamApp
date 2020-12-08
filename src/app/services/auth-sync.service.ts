@@ -25,14 +25,21 @@ export interface ICredentials {
   providedIn: 'root',
 })
 export class AuthProcessService {
+  private userSubject = new BehaviorSubject<User | null>(null);
+  private isLoadingSubject: BehaviorSubject<boolean>;
+
   onSuccessEmitter: EventEmitter<User> = new EventEmitter<User>();
   onErrorEmitter: EventEmitter<any> = new EventEmitter<any>();
-
-  private _user$ = new BehaviorSubject<User | null>(null);
-  get user$(): Observable<User | null> {
-    return this._user$.asObservable();
-  }
   user: User;
+
+  get user$(): Observable<User | null> {
+    return this.userSubject.asObservable();
+  }
+
+  get loading$(): Observable<boolean> {
+    return this.isLoadingSubject.asObservable();
+  }
+ 
   constructor(
     private router: Router,
     public afa: AngularFireAuth,
@@ -42,7 +49,7 @@ export class AuthProcessService {
 
   listenToUserEvents() {
     this.afa.user.subscribe((user: User | null) => {
-      this._user$.next(user);
+      this.userSubject.next(user);
       this.user = user;
     });
   }
@@ -52,7 +59,7 @@ export class AuthProcessService {
       console.log('Password reset email sent');
       return await this.afa.sendPasswordResetEmail(email);
     } catch (error) {
-      //return this.notifyError(error);
+      return this.notifyError(this.getErrorMessageAuth(error));
     }
   }
 
@@ -60,7 +67,7 @@ export class AuthProcessService {
     try {
       return await (await this.afa.currentUser).updatePassword(password);
     } catch (error) {
-      //return this.notifyError(error);
+      return this.notifyError(this.getErrorMessageAuth(error));
     }
   }
 
@@ -185,7 +192,7 @@ export class AuthProcessService {
   }
 
   public reloadUserInfo() {
-    return this._user$
+    return this.userSubject
       .pipe(take(1))
       .subscribe((user: User | null) => user && user.reload());
   }
@@ -214,7 +221,7 @@ export class AuthProcessService {
   }
 
   public getUserPhotoUrl(): Observable<string | null> {
-    return this._user$.pipe(
+    return this.userSubject.pipe(
       map((user: User | null) => {
         if (!user) {
           return null;
@@ -235,7 +242,7 @@ export class AuthProcessService {
     return `assets/images/user/${image}.svg`;
   }
 
-  notifyError(message: string) {
+  private notifyError(message: string) {
     this.toastService.setMessage({
       icon: 'error',
       title: 'Lo Siento!',
@@ -244,7 +251,7 @@ export class AuthProcessService {
     });
   }
 
-  getErrorMessageAuth(error: any): string {
+  private getErrorMessageAuth(error: any): string {
     let message = '';
     switch (error.code) {
       case 'auth/invalid-email':

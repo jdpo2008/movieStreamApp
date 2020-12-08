@@ -45,7 +45,7 @@
                       </div>
                       <div
                         *ngIf="
-                          (f.password.touched || f.email.dirty) &&
+                          (f.email.touched || f.email.dirty) &&
                           f.email.errors
                         "
                         class="bg-danger-transparent-2 text-danger px-2 py-2 br-3 mb-2"
@@ -120,7 +120,7 @@
                   <div class="row mt-4">
                     <div class="col-12 text-center">
                       <a
-                        href="forgot-password.html"
+                        [routerLink]="['/main/auth/password-reset']"
                         class="btn btn-link box-shadow-0 px-4"
                         >Olvidaste la Contraseña?</a
                       >

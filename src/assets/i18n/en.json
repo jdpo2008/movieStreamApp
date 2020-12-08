@@ -6,7 +6,7 @@
   "APP_HEADER": {},
   "DASHBOARD": {
     "TITLE": "Most Popular Movies",
-    "SELECT": "---[All]---",
+    "SELECT": "All",
     "GENRES": "Genres"
   }
 }

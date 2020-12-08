@@ -24,9 +24,10 @@ import { Genres } from '../../shared/models/MovieResponse.models';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  private unsubscribe: Subscription[] = [];
+
   movies: Movie[];
   data: MoviesResponse;
-  suscription: Subscription;
   options: PaginateOptions;
   page = new PageState();
   genres$: Observable<Genres[]>;
@@ -76,15 +77,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setPage(this.page);
-    this.translate
+    const languageSubscr = this.translate
       .use(this.translationService.getSelectedLanguage())
       .subscribe();
+    this.unsubscribe.push(languageSubscr);
     this.genres$ = this._movieService.getGenres();
   }
-
-  ngOnDestroy() {
-    this.suscription.unsubscribe();
-  }
+ 
   genresChande(event: any) {
     console.log(event.target.value);
     this.genre = event.target.value;
@@ -93,7 +92,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setPage(event: PageState) {
     this.spinner.show();
-    this.suscription = this._movieService
+    const movieSubscr = this._movieService
       .getAllPopular(String(event.currentPage), this.genre)
       .subscribe(
         (resp) => {
@@ -109,5 +108,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       );
+      this.unsubscribe.push(movieSubscr);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }

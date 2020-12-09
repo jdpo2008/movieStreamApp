@@ -1174,7 +1174,7 @@
     padding: 1.25rem 1.25rem;
   }
   footer.footer {
-    padding: 1.25rem 1.25rem 1.25rem 250px;
+    padding: 0.5rem 1.25rem 0.5rem 250px;
   }
   .sidenav-toggled footer.footer {
     padding: 1.25rem 1.25rem 1.25rem 70px;

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PagesContentComponent } from './layout/pages-content/pages-content.component';
 import { FullContentComponent } from './layout/full-content/full-content.component';
 import { AuthGuard } from './guards/auth.guard';
+//import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {

@@ -7,6 +7,7 @@
   "DASHBOARD": {
     "TITLE": "Peliculas más Populares",
     "SELECT": "Todos",
-    "GENRES": "Género"
+    "GENRES": "Género",
+    "RATE": "Tasa"
   }
 }

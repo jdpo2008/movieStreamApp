@@ -3,34 +3,33 @@
     class="col-lg-3 col-md-3 col-sm-6 col-12 mb-4"
     *ngFor="let movie of movies"
   >
-    <div class="card overflow-hidden">
-      <a href="#">
-        <img
-          class="img-fluid"
-          [src]="movie.poster_path | imageFill: '500'"
-          alt="img of {{ movie.title }}"
-        />
-      </a>
-      <!-- [src]="movie.poster_path | imageFill: '500'" -->
-      <div class="card-body">
-        <h4 class="card-title text-center text-white">{{ movie.title }}</h4>
-        <div class="row">
-          <div class="col p-0">
-            <div class="votos py-1">
-              {{ movie.vote_average | number: "1.1" }}
-            </div>
-          </div>
-          <div class="col-9 text-center p-0">
-            <star-rating
-              [value]="movie.vote_average"
-              totalstars="10"
-              checkedcolor="yellow"
-              uncheckedcolor="grey"
-              size="17px"
-            ></star-rating>
-          </div>
-        </div>
-      </div>
+    <a href="#"  
+      style="cursor: pointer !important">
+      <img
+        class="img-fluid"
+        [src]="movie.poster_path | imageFill: '440'"
+        alt="img of {{ movie.title }}"
+        style="border-radius: 1rem;"
+        placement="top"
+        [ngbTooltip]="movie.title"
+      />
+    </a>
+    <div class="gauge-meter">
+      <mwl-gauge
+          [max]="100"
+          [dialStartAngle]="-90"
+          [dialEndAngle]="-90.001"
+          [value]="movie.vote_average * 10"
+          [animated]="true"
+          [animationDuration]="1"
+        >
+      </mwl-gauge>
+    </div>
+    <!-- <div class="votos py-1">
+      <h6 class="card-title text-white">{{ movie.vote_average }}</h6>
+    </div> -->
+    <div class="votos py-1">
+      <span class="text-info"><strong>{{ "DASHBOARD.RATE" | translate }}:</strong></span> {{ movie.vote_average | number: "1.1" }}
     </div>
   </div>
 </div>

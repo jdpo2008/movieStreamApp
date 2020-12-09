@@ -8,6 +8,18 @@
   display: none !important;
 }
 
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.show-scrollTop {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
 .ps > .ps__rail-x,
 .ps > .ps__rail-y {
   opacity: 0.6;
@@ -76,4 +88,29 @@
 
 .text-error {
   font-size: 10px !important;
+}
+mwl-gauge {
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: absolute;
+  z-index: 3;
+  top: -5px;
+  left: 8px;
+}
+mwl-gauge > .gauge > .dial {
+  stroke: #eee;
+  stroke-width: 5;
+  fill: rgba(0, 0, 0, 1);
+}
+mwl-gauge > .gauge > .value {
+  stroke: rgb(19, 214, 78);
+  stroke-width: 5;
+  fill: rgba(0, 0, 0, 0);
+}
+mwl-gauge > .gauge > .value-text {
+  fill: yellow;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
 }

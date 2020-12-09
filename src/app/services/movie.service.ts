@@ -21,8 +21,6 @@ export class MovieService {
     language: 'es-ES',
   };
 
-  '&page=1&with_genres=28';
-
   constructor(private http: HttpClient) {}
 
   getAllPopular(
@@ -42,8 +40,6 @@ export class MovieService {
         with_genres: genre,
       };
     }
-
-    console.log(genre);
     return this.http.get<MoviesResponse>(`${this.BaseURL}discover/movie?`, {
       params,
     });

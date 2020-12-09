@@ -12,4 +12,8 @@
 </div>
 
 <!-- Back to top -->
-<a href="javascript:;" id="back-to-top"><i class="fe fe-chevrons-up"></i></a>
+<div id="back-to-top" class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <button type="button" class="btn active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+      <i class="fe fe-chevrons-up text-white" ></i>
+  </button>
+</div>

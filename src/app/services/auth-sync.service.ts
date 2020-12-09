@@ -157,7 +157,8 @@ export class AuthProcessService {
 
   async handleSuccess(userCredential: UserCredential) {
     this.onSuccessEmitter.next(userCredential.user);
-
+    let accessToken = userCredential.user.getIdToken(false);
+    console.log(accessToken);
     if (!userCredential.user.emailVerified) {
       this.toastService.setMessage({
         icon: 'warning',
@@ -240,6 +241,10 @@ export class AuthProcessService {
 
   public getPhotoPath(image: string): string {
     return `assets/images/user/${image}.svg`;
+  }
+
+  public getIdToken() {
+    return this.afa.user;
   }
 
   private notifyError(message: string) {

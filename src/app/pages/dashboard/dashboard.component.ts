@@ -82,10 +82,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
     this.unsubscribe.push(languageSubscr);
     this.genres$ = this._movieService.getGenres();
+
   }
  
   genresChande(event: any) {
-    console.log(event.target.value);
     this.genre = event.target.value;
     this.setPage(this.page);
   }

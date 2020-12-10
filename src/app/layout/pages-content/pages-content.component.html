@@ -3,7 +3,7 @@
     <app-sidebar></app-sidebar>
     <div class="app-content main-content">
       <div class="side-app">
-        <app-header></app-header>
+        <app-header (searchValue)="searchMovie($event)"></app-header>
         <app-pages-header></app-pages-header>
         <router-outlet></router-outlet>
       </div>

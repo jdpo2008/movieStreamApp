@@ -32,5 +32,9 @@ export class PagesContentComponent implements OnInit {
   ngOnInit(): void {
    
   }
+
+  searchMovie(value: string) {
+    console.log(value);
+  }
   
 }

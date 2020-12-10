@@ -49,13 +49,15 @@
         <form class="form-inline">
           <div class="search-element">
             <input
+              #searchInput
               type="search"
               class="form-control header-search"
               placeholder="Search…"
               aria-label="Search"
               tabindex="1"
+              (keyup)="updateSearch($event.target.value)"
             />
-            <button class="btn btn-primary-color" type="submit">
+            <button class="btn btn-primary-color" type="button">
               <svg
                 class="header-icon search-icon"
                 x="1008"

@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Output, ElementRef, EventEmitter } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { LanguageFlag } from '../../../shared/interfaces/language.interface';
 import { TranslationService } from '../../../services/traslation.service';
 import { AuthProcessService } from '../../../services/auth-sync.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { User } from '@firebase/auth-types';
 
 @Component({
@@ -13,8 +13,13 @@ import { User } from '@firebase/auth-types';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private unsubscribe: Subscription[] = [];
+  private _searchSubject: Subject<string> = new Subject();
+
+  @ViewChild('searchInput', { static: false }) searchInput:  ElementRef;
+  @Output() searchValue: EventEmitter<string> = new EventEmitter();
+  
   photoURL: string;
-  userSuscription: Subscription;
   language: LanguageFlag;
   languages: LanguageFlag[] = [
     {
@@ -48,13 +53,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.setSelectedLanguage();
       });
 
-    this.userSuscription = this._authService.user$
+    let userSuscrit = this._authService.user$
                               .pipe(map((res: User) => { return res.photoURL }))
-                              .subscribe((data: any) => this.photoURL = data)
+                              .subscribe((data: any) => this.photoURL = data);
+
+    this.unsubscribe.push(userSuscrit);
+
+    this._setSearchSubscription();
   }
 
   ngOnDestroy(): void {
-    this.userSuscription.unsubscribe();
+    this.unsubscribe.forEach((sc) => sc.unsubscribe());
+    this._searchSubject.unsubscribe();
   }
 
   setLanguageWithRefresh(lang) {
@@ -81,4 +91,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signOut() {
     this._authService.signOut();
   }
+  
+  updateSearch(value: string) {
+    this._searchSubject.next(value);
+  }
+
+  private _setSearchSubscription() {
+    this._searchSubject.pipe(
+      debounceTime(500)
+    ).subscribe((search: string) => {
+      this.searchValue.emit(search);
+    });
+  }
+
 }

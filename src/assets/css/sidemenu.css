@@ -188,6 +188,7 @@
 .app-sidebar__toggle a {
   color: #b6c1d9;
 }
+
 .app-sidebar__toggle .header-icon {
   font-size: 25px;
   line-height: 30px;
@@ -406,7 +407,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  color: #1a1630;
+  color: #191919;
   width: 100%;
   padding: 20px;
   /* display: inline-block; */
@@ -480,7 +481,7 @@
   -webkit-transition: border-left-color 0.3s ease, background-color 0.3s ease;
   -o-transition: border-left-color 0.3s ease, background-color 0.3s ease;
   transition: border-left-color 0.3s ease, background-color 0.3s ease;
-  color: #1a1630;
+  color: #191919;
   margin: 6px 5px 6px 12px;
   border-radius: 50px;
 }
@@ -489,7 +490,7 @@
 .side-menu__item:focus {
   text-decoration: none;
   background: #ebeef1;
-  color: #1a1630;
+  color: #191919;
 }
 
 @media (min-width: 768px) {
@@ -858,7 +859,7 @@
     -webkit-transition: border-left-color 0.3s ease, background-color 0.3s ease;
     -o-transition: border-left-color 0.3s ease, background-color 0.3s ease;
     transition: border-left-color 0.3s ease, background-color 0.3s ease;
-    color: #1a1630;
+    color: #191919;
     margin: 6px 5px 6px 12px;
     border-radius: 50px;
     color: #5c678f;
@@ -1407,7 +1408,7 @@
   width: 24px;
   height: 24px;
   color: #1a1630;
-  fill: #1a1630;
+  fill: #191919;
 }
 
 .tooltip {
@@ -1469,7 +1470,7 @@
 
 .sidebar-navs a {
   background: #fff;
-  color: #576482 !important;
+  color: #191919 !important;
   border-radius: 50px;
   padding: 0.5rem !important;
   margin: 12px 8px 0 8px;
@@ -1479,7 +1480,7 @@
 }
 
 .sidebar-navs button {
-  background: #2f3655;
+  background: #383838;
   color: #576482 !important;
   border-radius: 50px;
   padding: 0.5rem !important;
@@ -1490,7 +1491,7 @@
 }
 
 .sidebar-navs button:hover {
-  background: #576482;
+  background: #0455d1;
 }
 
 .sidebar-navs button:hover > i {
@@ -1507,14 +1508,14 @@
 
 .sidebar-navs .header-icons {
   color: #5c678f;
-  fill: #5c678f;
+  fill: #191919;
   font-size: 20px;
   vertical-align: middle;
 }
 
 .slide.active.is-expanded .side-menu__item {
   text-decoration: none;
-  color: #1a1630;
+  color: #191919;
   background: #ebeef1;
   border-radius: 50px;
 }

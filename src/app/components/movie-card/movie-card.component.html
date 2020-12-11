@@ -6,10 +6,9 @@
     <a href="#"  
       style="cursor: pointer !important">
       <img
-        class="img-fluid"
+        class="img-fluid movie-card"
         [src]="movie.poster_path | imageFill: '440'"
         alt="img of {{ movie.title }}"
-        style="border-radius: 1rem;"
         placement="top"
         [ngbTooltip]="movie.title"
       />
@@ -29,7 +28,7 @@
       <h6 class="card-title text-white">{{ movie.vote_average }}</h6>
     </div> -->
     <div class="votos py-1">
-      <span class="text-info"><strong>{{ "DASHBOARD.RATE" | translate }}:</strong></span> {{ movie.vote_average | number: "1.1" }}
+      <span class="" style="color: #0455b1;"><strong>{{ "DASHBOARD.RATE" | translate }}:</strong></span> {{ movie.vote_average | number: "1.1" }}
     </div>
   </div>
 </div>

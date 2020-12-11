@@ -1,11 +1,12 @@
 {
   "SIDEBAR": {
+    "PAGES": "Paginas",
     "DASHBOARD": "PRINCIPAL"
   },
   "HEADER": {},
   "APP_HEADER": {},
   "DASHBOARD": {
-    "TITLE": "Peliculas más Populares",
+    "TITLE": "Películas más Populares",
     "SELECT": "Todos",
     "GENRES": "Género",
     "RATE": "Tasa"

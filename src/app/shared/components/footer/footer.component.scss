@@ -1,0 +1,14 @@
+.social-icon:hover {
+  background: #fff !important;
+  border: 1px solid #1da1f2 !important;
+  transform: scale(1.2) !important;
+  & > i.fa-facebook {
+    color: #3b5998 !important;
+  }
+  & > i.fa-twitter {
+    color: #1da1f2 !important;
+  }
+  & > i.fa-linkedin {
+    color: #2867b2 !important;
+  }
+}

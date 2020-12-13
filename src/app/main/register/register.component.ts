@@ -3,6 +3,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProcessService } from '../../services/auth-sync.service';
 import { AuthProvider } from '../../enums';
 
+const EMAIL_REGEX = new RegExp(
+  [
+    '^(([^<>()[\\]\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\.,;:\\s@"]+)*)',
+    '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.',
+    "[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+",
+    "[a-zA-Z]{2,}))$",
+  ].join("")
+);
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -44,16 +53,9 @@ export class RegisterComponent implements OnInit {
     console.log(event);
   }
 
-  googleLogin() {
-    this._authService.signInWith(AuthProvider.Google);
-  }
-
-  facebookLogin() {
-    this._authService.signInWith(AuthProvider.Facebook);
-  }
-
-  twitterLogin() {
-    this._authService.signInWith(AuthProvider.Twitter);
+  isValidInput(fieldName: string): boolean {
+    return this.registerForm.controls[fieldName].invalid &&
+      (this.registerForm.controls[fieldName].dirty || this.registerForm.controls[fieldName].touched);
   }
 
   private initRegisterForm() {
@@ -71,9 +73,7 @@ export class RegisterComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.pattern(
-              /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-            ),
+            Validators.pattern(EMAIL_REGEX),
           ],
         ],
         password: [
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
           ],
         ],
         confirmPassword: ['', [Validators.required]],
-        policy: [false, [Validators.required]],
+        policy: [false, [Validators.required, Validators.requiredTrue]],
       },
       {
         validator: this.ConfirmedValidator('password', 'confirmPassword'),

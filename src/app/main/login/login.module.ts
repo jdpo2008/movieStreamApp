@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ComponentsModule } from '../../components/components.module';
 
 const route: Routes = [
   {
@@ -21,6 +22,7 @@ const route: Routes = [
     NgbModule,
     CommonModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RouterModule.forChild(route),
   ],
 })

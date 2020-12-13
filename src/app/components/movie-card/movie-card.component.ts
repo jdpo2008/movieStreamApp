@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Movie } from '../../shared/models/MovieResponse.models';
 import { TranslationService } from '../../services/traslation.service';
 import { Subscription } from 'rxjs';
+import { MovieService } from '../../services/movie.service';
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -10,12 +12,16 @@ import { Subscription } from 'rxjs';
 })
 export class MovieCardComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
+  
   @Input() movies: Movie[] = [];
 
   constructor(
     public translate: TranslateService,
-    private translationService: TranslationService
-  ) {}
+    private translationService: TranslationService,
+    public _movieService: MovieService,
+  ) {
+    
+  }
 
   ngOnInit(): void {
     const languageSubscr = this.translate
@@ -26,5 +32,9 @@ export class MovieCardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() : void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  }
+
+  addFavorites(id: number) {
+   
   }
 }

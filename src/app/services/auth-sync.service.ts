@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { firebase } from '@firebase/app';
 import '@firebase/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User, UserCredential } from '@firebase/auth-types';
@@ -11,15 +10,12 @@ import { Accounts } from './../enums/accounts.enum';
 import { AuthProvider } from '../enums';
 import { FirestoreSyncService } from './firestore-sync.service';
 import { ToastService } from './toast.service';
-
-export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-export const twitterAuthProvider = new firebase.auth.TwitterAuthProvider();
-
-export interface ICredentials {
-  email: string;
-  password: string;
-}
+import { 
+  ICredentials, 
+  googleAuthProvider, 
+  facebookAuthProvider, 
+  twitterAuthProvider 
+} from '../shared/interfaces/auth.inetrafce';
 
 @Injectable({
   providedIn: 'root',

@@ -8,6 +8,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { PageState, PaginateOptions } from 'ngx-paginate';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import {
   Movie,
   MoviesResponse,
@@ -25,7 +26,7 @@ import { Genres } from '../../shared/models/MovieResponse.models';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
-
+  public config: PerfectScrollbarConfigInterface = {};
   movies: Movie[];
   data: MoviesResponse;
   options: PaginateOptions;

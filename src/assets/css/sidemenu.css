@@ -62,7 +62,6 @@
   -webkit-transition: margin-left 0.3s ease;
   -o-transition: margin-left 0.3s ease;
   transition: margin-left 0.3s ease;
-  overflow: hidden;
 }
 .app-content .side-app {
   padding: 25px 1.5rem 0 1.5rem;

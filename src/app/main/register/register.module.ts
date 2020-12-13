@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StrengthMeterModule } from 'ngx-strength-meter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './register.component';
+import { ComponentsModule } from '../../components/components.module';
 
 const route: Routes = [
   {
@@ -23,6 +24,7 @@ const route: Routes = [
     CommonModule,
     ReactiveFormsModule,
     StrengthMeterModule,
+    ComponentsModule,
     RouterModule.forChild(route),
   ],
 })

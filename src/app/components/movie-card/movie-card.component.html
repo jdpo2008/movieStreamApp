@@ -24,11 +24,20 @@
         >
       </mwl-gauge>
     </div>
-    <!-- <div class="votos py-1">
-      <h6 class="card-title text-white">{{ movie.vote_average }}</h6>
-    </div> -->
-    <div class="votos py-1">
-      <span class="" style="color: #0455b1;"><strong>{{ "DASHBOARD.RATE" | translate }}:</strong></span> {{ movie.vote_average | number: "1.1" }}
+    <div class="d-flex justify-content-between mr-2 ml-2 mt-1">
+      <div class="votos py-1">
+        <span class="" style="color: #0455b1;"><strong>{{ "DASHBOARD.RATE" | translate }}:</strong></span> {{ movie.vote_average | number: "1.1" }}
+      </div>
+      <div class="votos">
+        <button class="btn" (click)="addFavorites(movie.id)" type="button">
+          <i 
+          class="fa fa-star"
+          placement="top"
+          ngbTooltip="Añadir a Favoritos"></i>
+        </button>
+      
+      </div>
     </div>
+    
   </div>
 </div>

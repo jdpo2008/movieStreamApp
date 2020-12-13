@@ -2,3 +2,14 @@
   border-radius: 1rem;
   box-shadow: 0 0 0 4px #020202;
 }
+button.btn {
+  padding: 0 !important;
+}
+
+button .fa-star {
+  font-size: 1rem;
+  color: gainsboro;
+}
+button .fa-star:hover {
+  color: yellow;
+}

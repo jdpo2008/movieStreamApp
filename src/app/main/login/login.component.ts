@@ -8,6 +8,14 @@ import {
 import { AuthProvider } from '../../enums';
 import { AuthProcessService } from '../../services/auth-sync.service';
 
+const EMAIL_REGEX = new RegExp(
+  [
+    '^(([^<>()[\\]\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\.,;:\\s@"]+)*)',
+    '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.',
+    "[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+",
+    "[a-zA-Z]{2,}))$",
+  ].join("")
+);
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
       password: ['', [Validators.required]],
       remember: [false],
     });
@@ -55,20 +63,11 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  googleLogin() {
-    this.cd.markForCheck();
-    this._authService.signInWith(AuthProvider.Google).finally(() => this.cd.markForCheck());
-  }
-
-  facebookLogin() {
-    this.cd.markForCheck();
-    this._authService.signInWith(AuthProvider.Facebook).finally(() => this.cd.markForCheck());
-  }
-
-  twitterLogin() {
-    this.cd.markForCheck();
-    this._authService.signInWith(AuthProvider.Twitter).finally(() => this.cd.markForCheck());
-  }
-
   getMessageError(control: FormControl) {}
+
+  isValidInput(fieldName: string): boolean {
+    return this.loginForm.controls[fieldName].invalid &&
+      (this.loginForm.controls[fieldName].dirty || this.loginForm.controls[fieldName].touched);
+  }
+
 }

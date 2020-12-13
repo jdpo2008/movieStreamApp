@@ -12237,6 +12237,7 @@ div.conv-form-wrapper div#messages div.message.from {
   }
   .app-content.page-body .side-app {
     padding: 6.2rem 0.75rem 0 0.75rem !important;
+    overflow: auto !important;
   }
   .navsearch {
     margin: 5px;

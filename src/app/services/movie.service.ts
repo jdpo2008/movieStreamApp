@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,13 +15,16 @@ import {
 export class MovieService {
   private BaseURL: string = environment.themoviedbCongi.apiURL;
   private Api_Key: string = environment.themoviedbCongi.apiKey;
-
+  private headers: HttpHeaders = new HttpHeaders();
+  
   private params = {
     api_key: this.Api_Key,
     language: 'es-ES',
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.headers.set("Content-Type", "application/json;charset=utf-8");
+  }
 
   getAllPopular(
     page?: string,
@@ -69,4 +72,12 @@ export class MovieService {
       })
       .pipe(map((resp: any) => resp.genres));
   }
+
+  addFavorites(id: number) {
+    return this.http
+      .post<any>(`${this.BaseURL}/movie${id}/rating?`, { 
+        params: this.params, headers: this.headers 
+      });
+  }
+
 }

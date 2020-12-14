@@ -5710,9 +5710,9 @@ body.dark-mode {
   font-size: 1rem;
 }
 
-.dark-mode .footer .social .social-icon:hover {
+/* .dark-mode .footer .social .social-icon:hover {
   background: #0455b1;
-}
+} */
 
 .dark-mode .footer .social .social-icon.social-facebook {
   background: #43609c;
